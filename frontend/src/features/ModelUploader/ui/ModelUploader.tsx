@@ -3,6 +3,7 @@ import type { ExtFile } from '@files-ui/react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setModalUrl, removeModalUrl } from '@/entities/Mesh/model/meshSlice'
+import { Container } from '@mantine/core'
 
 export const ModelUploader = () => {
   const [files, setFiles] = useState<ExtFile[]>([])
@@ -34,7 +35,7 @@ export const ModelUploader = () => {
   }
 
   return (
-    <>
+    <Container>
       <Dropzone
         onChange={updateFiles}
         value={files}
@@ -53,6 +54,6 @@ export const ModelUploader = () => {
       >
         Отобразить модель
       </button>
-    </>
+    </Container>
   )
 }
