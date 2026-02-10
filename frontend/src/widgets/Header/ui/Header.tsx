@@ -1,14 +1,13 @@
 import { useState } from 'react'
-import { Burger, Container, Group } from '@mantine/core'
+import { Burger, Container, Group, Button } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { Logo } from '@/shared/'
-import classes from './Header.module.css'
 
 const links = [
-  { link: '/about', label: 'Features' },
-  { link: '/pricing', label: 'Pricing' },
-  { link: '/learn', label: 'Learn' },
-  { link: '/community', label: 'Community' },
+  { link: '/about', label: 'Заглушка 1' },
+  { link: '/pricing', label: 'Заглушка 2' },
+  { link: '/learn', label: 'Заглушка 3' },
+  { link: '/community', label: 'Заглушка 4' },
 ]
 
 export const Header = () => {
@@ -16,30 +15,19 @@ export const Header = () => {
   const [active, setActive] = useState(links[0].link)
 
   const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      data-active={active === link.link || undefined}
-      onClick={(event) => {
-        event.preventDefault()
-        setActive(link.link)
-      }}
-    >
-      {link.label}
-    </a>
+    <Button size='xs' key={link.label}>{link.label}</Button>
   ))
 
   return (
-    <header className={classes.header}>
-      <Container fluid className={classes.inner}>
+    <Container fluid>
+      <Group justify="space-between">
         <Logo />
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
+      </Group>
 
-        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
-      </Container>
-    </header>
+      <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+    </Container>
   )
 }
