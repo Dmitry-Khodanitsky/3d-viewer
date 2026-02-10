@@ -5,12 +5,13 @@ import { Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { selectCameraView } from '@/entities/Camera/model/viewportSlice'
 import { Camera } from '@/entities/Camera/ui/Camera'
+import { Container } from '@mantine/core'
 
 export const Viewport = () => {
   const isOrthographic = useSelector(selectCameraView)
 
   return (
-    <div style={{ width: '75vw', height: '75vh' }}>
+    <Container h='75vh'>
       <Canvas style={{ background: 'gray' }}>
         {/* Добавляет свет и отражения типа "город" */}
         <Camera />
@@ -27,6 +28,6 @@ export const Viewport = () => {
 
         <axesHelper args={[10]} />
       </Canvas>
-    </div>
+    </Container>
   )
 }
