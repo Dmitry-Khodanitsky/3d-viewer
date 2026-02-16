@@ -1,7 +1,7 @@
 import { ActionButton } from '@/shared'
 import { IconCube } from '@tabler/icons-react'
 import { useDispatch } from 'react-redux'
-import { toggleCameraView } from '@/entities/Camera/model/viewportSlice'
+import { toggleCameraView } from '@/entities/Camera/model/cameraSlice'
 
 export const CameraControl = () => {
   const dispatch = useDispatch()
