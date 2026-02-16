@@ -6,7 +6,7 @@ import {
 import { useThree } from '@react-three/fiber'
 import { useRef, useLayoutEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { selectCameraView } from '@/entities/Camera/model/viewportSlice'
+import { selectCameraView } from '@/entities/Camera/model/cameraSlice'
 import * as THREE from 'three'
 
 export const Camera = () => {
