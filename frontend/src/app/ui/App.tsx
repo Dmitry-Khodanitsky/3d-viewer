@@ -1,22 +1,18 @@
 import '@mantine/core/styles.css'
-import { createTheme, MantineProvider } from '@mantine/core'
+import { MantineProvider, ColorSchemeScript, Flex } from '@mantine/core'
 import { Workspace } from '@/pages'
 import { Header } from '@/widgets'
 
-const theme = createTheme({
-  fontFamily: 'Open Sans, sans-serif',
-  primaryColor: 'cyan',
-})
-
 export default function App() {
   return (
-    <MantineProvider theme={theme}>
-      {
-        <>
+    <>
+      <ColorSchemeScript defaultColorScheme="dark" />
+      <MantineProvider defaultColorScheme="dark">
+        <Flex direction="column" h="100vh">
           <Header></Header>
           <Workspace />
-        </>
-      }
-    </MantineProvider>
+        </Flex>
+      </MantineProvider>
+    </>
   )
 }
