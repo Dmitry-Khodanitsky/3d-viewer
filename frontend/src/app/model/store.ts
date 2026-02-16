@@ -1,13 +1,13 @@
 import uiReducer from './uiSlice'
 import meshReducer from '@/entities/Mesh/model/meshSlice'
-import viewportReducer from '@/entities/Camera/model/viewportSlice'
+import cameraReducer from '@/entities/Camera/model/cameraSlice'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
   reducer: {
     ui: uiReducer,
     model: meshReducer,
-    viewport: viewportReducer,
+    camera: cameraReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

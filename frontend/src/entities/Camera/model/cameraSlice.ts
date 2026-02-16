@@ -11,8 +11,8 @@ const initialState: viewportState = {
   isOrthographic: false,
 }
 
-const viewportSlice = createSlice({
-  name: 'viewport',
+const cameraSlice = createSlice({
+  name: 'camera',
   initialState,
   reducers: {
     toggleCameraView: (state) => {
@@ -22,7 +22,7 @@ const viewportSlice = createSlice({
   },
 })
 
-export default viewportSlice.reducer
-export const { toggleCameraView } = viewportSlice.actions
+export default cameraSlice.reducer
+export const { toggleCameraView } = cameraSlice.actions
 export const selectCameraView = (state: RootState) =>
-  state.viewport.isOrthographic
+  state.camera.isOrthographic
