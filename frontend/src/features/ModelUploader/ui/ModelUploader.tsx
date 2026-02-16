@@ -1,59 +1,49 @@
-import { Dropzone, FileMosaic } from '@files-ui/react'
-import type { ExtFile } from '@files-ui/react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setModalUrl, removeModalUrl } from '@/entities/Mesh/model/meshSlice'
-import { Container } from '@mantine/core'
+import { setModalUrl } from '@/entities/Mesh/model/meshSlice'
+import { Stack, Text, Container, Center, Paper, Button } from '@mantine/core'
+import { useRef } from 'react'
+import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react'
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
 
 export const ModelUploader = () => {
-  const [files, setFiles] = useState<ExtFile[]>([])
+  const openRef = useRef<() => void>(null)
   const dispatch = useDispatch()
-
-  const updateFiles = (incomingFiles: ExtFile[]) => {
-    setFiles(incomingFiles)
-  }
-
-  const removeFile = (id: string | number | undefined) => {
-    setFiles((prev) => prev.filter((x) => x.id !== id))
-    // Если удаляем текущую активную модель
-    dispatch(removeModalUrl())
-  }
-
-  const handleUploadToScene = () => {
-    // Берем первый валидный файл из списка
-    const fileToUpload = files[0]?.file
-
-    if (fileToUpload) {
-      // 1. Создаем ссылку
-      const url = URL.createObjectURL(fileToUpload)
-
-      // 2. Отправляем в Redux
-      dispatch(setModalUrl(url))
-
-      console.log('Модель загружена в сцену:', url)
-    }
+  const updateFiles = (incomingFiles: any) => {
+    const url = URL.createObjectURL(incomingFiles[0])
+    dispatch(setModalUrl(url))
   }
 
   return (
-    <Container>
-      <Dropzone
-        onChange={updateFiles}
-        value={files}
-        maxFiles={1} // Если нужна только одна модель
-        accept=".gltf,.glb,.obj" // Ограничиваем типы файлов
+    <Dropzone
+      w="100%"
+      h="100%"
+      onDrop={(files) => updateFiles(files)}
+      onReject={(files) => console.log('rejected files', files)}
+      accept={{
+        'model/gltf-binary': ['.glb'],
+        'model/gltf+json': ['.gltf'],
+        'text/plain': ['.obj'],
+      }}
+      styles={{
+        inner: { height: '100%' },
+      }}
+    >
+      <Stack
+        align="center"
+        justify="center"
+        gap="xs"
+        h="100%"
+        style={{ pointerEvents: 'none' }}
+      
       >
-        {files.map((file) => (
-          <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-        ))}
-      </Dropzone>
-
-      <button
-        onClick={handleUploadToScene}
-        disabled={files.length === 0}
-        style={{ marginTop: '10px' }}
-      >
-        Отобразить модель
-      </button>
-    </Container>
+        <Text>Загрузите 3D модель</Text>
+        <Button color="cyan" variant="outline" radius="xl">
+          Select a file
+        </Button>
+        <Text size="md">Or</Text>
+        <Text size="xl">drag and drop a file here</Text>
+      </Stack>
+    </Dropzone>
   )
 }
