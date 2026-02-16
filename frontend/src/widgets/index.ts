@@ -1,3 +1,4 @@
 export * from './Header'
-export * from './Toolbar'
+export * from '../entities/Toolbar'
 export * from './Viewport'
+export * from './UploadZone'
