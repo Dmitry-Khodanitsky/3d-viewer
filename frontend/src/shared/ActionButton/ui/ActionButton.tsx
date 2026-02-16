@@ -7,7 +7,7 @@ type TProps = {
 
 export const ActionButton = ({ handleClick, children }: TProps) => {
   return (
-    <ActionIcon variant="filled" aria-label="cube" onClick={handleClick}>
+    <ActionIcon variant="outline" aria-label="cube" color='cyan' radius='xl' onClick={handleClick}>
       {children}
     </ActionIcon>
   )
