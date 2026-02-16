@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Burger, Container, Group, Button } from '@mantine/core'
+import { Burger, Flex, Group, Button } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { Logo } from '@/shared/'
 
@@ -15,19 +15,19 @@ export const Header = () => {
   const [active, setActive] = useState(links[0].link)
 
   const items = links.map((link) => (
-    <Button size='xs' key={link.label}>{link.label}</Button>
+    <Button size="xs" key={link.label}>
+      {link.label}
+    </Button>
   ))
 
   return (
-    <Container fluid>
-      <Group justify="space-between">
-        <Logo />
-        <Group gap={5} visibleFrom="xs">
-          {items}
-        </Group>
+    <Flex bg="dark" justify="space-between" px="xs">
+      <Logo />
+      <Group gap={5} visibleFrom="xs">
+        {items}
       </Group>
 
       <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
-    </Container>
+    </Flex>
   )
 }
